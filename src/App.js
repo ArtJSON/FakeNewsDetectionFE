@@ -1,13 +1,30 @@
+import axios from "axios";
 import { useState } from "react";
 import "./App.css";
 
-function getRandomInt(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
 function App() {
   const [isVerified, setIsVerified] = useState(false);
+  const [isTrue, setIsTrue] = useState(false);
   const [isLoading, setIsLodaing] = useState(false);
+  const [formValue, setFormValue] = useState("");
+  const [ngrokLink, setNgrokLink] = useState("");
+
+  const handleSubmit = () => {
+    setIsLodaing(true);
+    setIsVerified(false);
+    fetch(ngrokLink + "/verify?text=" + formValue, {
+      headers: { "ngrok-skip-browser-warning": "true" },
+    })
+      .catch(() => {
+        setIsLodaing(false);
+      })
+      .then((response) => response.json())
+      .then(({ value }) => {
+        setIsTrue(value === "Real");
+        setIsLodaing(false);
+        setIsVerified(true);
+      });
+  };
 
   return (
     <div className="App">
@@ -17,17 +34,35 @@ function App() {
           className="linkForm"
           onSubmit={(e) => {
             e.preventDefault();
-            setIsVerified(false);
-            setIsLodaing(true);
-            setTimeout(() => {
-              setIsVerified(true);
-              setIsLodaing(false);
-            }, getRandomInt(500, 2000));
+            handleSubmit();
           }}
         >
-          <label htmlFor="url">Link to the article:</label>
+          <label htmlFor="link">
+            Ngrok link (for example https://9708-35-194-138-100.ngrok.io):
+          </label>
           <div className="inputGroup">
-            <input type="text" name="url" id="url" className="linkInput" />
+            <input
+              type="text"
+              name="link"
+              id="link"
+              className="ngrokInput"
+              onChange={(e) => {
+                setNgrokLink(e.target.value);
+              }}
+            />
+          </div>
+
+          <label htmlFor="articleText">Text of the article:</label>
+          <div className="inputGroup">
+            <textarea
+              type="text"
+              name="articleText"
+              id="articleText"
+              className="linkInput"
+              onChange={(e) => {
+                setFormValue(e.target.value);
+              }}
+            />
             <input type="submit" value="Verify" className="submitButton" />
           </div>
         </form>
@@ -37,7 +72,7 @@ function App() {
       ) : (
         <div class="loaderLinePlaceholder" />
       )}
-      {isVerified && <Result true={Math.random() >= 0.5} />}
+      {isVerified && <Result isTrue={isTrue} />}
     </div>
   );
 }
@@ -47,7 +82,7 @@ function Result(props) {
     <div className="resultContainer">
       <p className="resultContainerResult">
         The article has been determined to be
-        {props.true ? " true ✅" : " fake ❌"}
+        {props.isTrue ? " true ✅" : " fake ❌"}
       </p>
       <p>
         Learn more about our verification process <a href="#">here</a>

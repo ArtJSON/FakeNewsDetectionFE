@@ -60,6 +60,15 @@ h1 {
   width: 100%;
 }
 
+.ngrokInput {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  outline: none;
+  border: darkgrey 1px solid;
+  width: 100%;
+}
+
 .submitButton {
   transition: background-color 0.2s;
   font-weight: bold;
@@ -70,6 +79,11 @@ h1 {
 
 .submitButton:hover {
   background-color: rgb(227, 227, 227);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .resultContainer {
