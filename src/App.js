@@ -20,7 +20,7 @@ function App() {
       })
       .then((response) => response.json())
       .then(({ value }) => {
-        setIsTrue(value === "Real");
+        setIsTrue(value === "real");
         setIsLodaing(false);
         setIsVerified(true);
       });
