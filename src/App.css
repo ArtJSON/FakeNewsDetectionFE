@@ -155,3 +155,21 @@ textarea {
     width: 100%;
   }
 }
+
+.about-page {
+  box-sizing: border-box;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 1000px;
+  text-align: left;
+
+  -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+}
+.about-page > h2 {
+  font-size: 1.25rem;
+}

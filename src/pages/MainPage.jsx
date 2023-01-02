@@ -1,8 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
-import "./App.css";
 
-function App() {
+export default function MainPage() {
   const [isVerified, setIsVerified] = useState(false);
   const [isTrue, setIsTrue] = useState(false);
   const [isLoading, setIsLodaing] = useState(false);
@@ -90,5 +88,3 @@ function Result(props) {
     </div>
   );
 }
-
-export default App;
