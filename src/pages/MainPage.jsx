@@ -83,7 +83,7 @@ function Result(props) {
         {props.isTrue ? " true ✅" : " fake ❌"}
       </p>
       <p>
-        Learn more about our verification process <a href="#">here</a>
+        Learn more about our verification process <a href="/about">here</a>
       </p>
     </div>
   );
